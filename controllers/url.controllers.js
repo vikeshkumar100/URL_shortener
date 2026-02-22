@@ -1,4 +1,4 @@
-import Url from "../models/url.model.js";
+import Url from "../models/url.models.js";
 import { nanoid } from "nanoid";
 
 export const shortUrl=async (req,res)=>{

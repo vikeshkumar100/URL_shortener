@@ -1,5 +1,5 @@
 import express from 'express'
-import { shortUrl,findurl,showAnalytics,showAllAnalytics} from '../controllers/url.controller.js';
+import { shortUrl,findurl,showAnalytics,showAllAnalytics} from '../controllers/url.controllers.js';
 
 const router=express.Router();
 

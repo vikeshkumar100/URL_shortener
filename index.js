@@ -1,6 +1,6 @@
 import express from 'express';
 import connectDb from './connection.js';
-import router from './routes/url.route.js';
+import router from './routes/url.routes.js';
 
 const app=express();
 const PORT=8000;
