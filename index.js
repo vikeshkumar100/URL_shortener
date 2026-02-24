@@ -1,13 +1,19 @@
 import express from 'express';
 import connectDb from './connection.js';
-import router from './routes/url.routes.js';
+import urlrouter from './routes/url.routes.js';
+import authrouter from './routes/auth.routes.js';
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser';
 
 const app=express();
 const PORT=8000;
-app.use(express.json());
-connectDb();
+dotenv.config();
+await connectDb('mongodb://127.0.0.1:27017/UrlShortener');
 
-app.use('/',router);
+app.use(express.json());
+app.use(cookieParser());
+app.use('/api/auth',authrouter);
+app.use('/api/url',urlrouter);
 
 app.get('/',(req,res)=>{
     res.send(`<h1 style="text-align:center;">Vikesh</h1>`);

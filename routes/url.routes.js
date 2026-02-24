@@ -3,9 +3,9 @@ import { shortUrl,findurl,showAnalytics,showAllAnalytics} from '../controllers/u
 
 const router=express.Router();
 
-router.post('/url',shortUrl);
+router.post('/',shortUrl);
+router.get('/analytics',showAllAnalytics);
+router.get('/analytics/:id',showAnalytics);
 router.get('/:id',findurl);
-router.get('/url/analytics/:id',showAnalytics);
-router.get('/url/analytics',showAllAnalytics);
 
 export default router;

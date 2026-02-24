@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const connectDb=async ()=>{
+const connectDb=async (url)=>{
     try{
-    const con=await mongoose.connect('mongodb://127.0.0.1:27017/UrlShortener');
-    console.log(`Db connected`);
+        await mongoose.connect(url);
+        console.log(`Db connected`);
     }catch(err){
         console.log(`Db connection failed ,error : ${err}`);
     }
