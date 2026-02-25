@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const urlSchema=mongoose.Schema({
+const urlSchema=new mongoose.Schema({
     originalUrl:{
         type:String,
         required:true
@@ -12,6 +12,11 @@ const urlSchema=mongoose.Schema({
     visitCount:{
         type:Number,
         default:0
+    },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user",
+        required:true
     }
 },{
     timestamps:true

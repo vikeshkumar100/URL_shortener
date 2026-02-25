@@ -4,17 +4,18 @@ import { nanoid } from "nanoid";
 export const shortUrl=async (req,res)=>{
     try{
         const {originalUrl}=req.body;
+        const userId=req.user;
         if(!originalUrl)
             return res.status(400).json({msg:"url is required"});
 
         let shortId=nanoid(6);
-        const result=await Url.create({originalUrl,shortId});
+        const result=await Url.create({originalUrl,shortId,userId});
         if(!result)
             return res.status(400).json({msg:"failed to short url",result});
 
         return res.status(201).json({
             msg:"short url successfully created",
-            shortUrl:`http://localhost:8000/${shortId}`,
+            shortUrl:`http://localhost:8000/api/url/${shortId}`,
             result
         })
     }catch(err){
@@ -42,7 +43,7 @@ export const findurl=async (req,res)=>{
 export const showAnalytics=async (req,res)=>{
     try{
         const shortId=req.params.id;
-        const result=await Url.findOne({shortId});
+        const result=await Url.findOne({shortId:shortId,userId:req.user});
         if(!result)
             return res.status(404).json({msg:"url not found"});
         
@@ -53,7 +54,7 @@ export const showAnalytics=async (req,res)=>{
 }
 export const showAllAnalytics=async (req,res)=>{
     try{
-        const result=await Url.find();
+        const result=await Url.find({userId:req.user});
         if(result.length<1)
             return res.status(404).json({msg:"url not found"});
         return res.status(200).json(result);
